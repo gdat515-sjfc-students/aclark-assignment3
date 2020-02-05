@@ -1,0 +1,29 @@
+---
+title: "Assignment 3"
+author: "Alex Clark"
+output: 
+  md_document:
+    variant: gfm
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(data.table)
+library(ggplot2)
+library(RColorBrewer)
+```
+
+
+```{r, echo=FALSE}
+challenger <- fread("challenger-data.txt")
+ggplot(data = challenger, aes(x = launch_temp, y = damage_index)) +
+  geom_point(aes(colour = damage_index), size = 3) +
+  scale_colour_gradient2(low = "green", mid = "orange", high = "red", midpoint = 4) +
+  scale_x_continuous(breaks = scales::pretty_breaks(n = 6)) +
+  scale_y_continuous(breaks = scales::pretty_breaks(n = 5)) +
+  ylab("Damage Index") +
+  xlab("Temperature at Launch (F)") +
+  ggtitle("Damage Index by Launch Temperature (F)", subtitle = "23 flights before Challenger launch") +
+  labs(color="Damage Index") 
+```
